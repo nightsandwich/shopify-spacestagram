@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+ .image-card:hover {
+  border: 3px solid dodgerblue;
+ }
+ .image-card {
+   padding: 1rem;
+ }
+ img {
+   filter: saturate(150%);
+   filter: brightness(120%);
+   filter: contrast(120%);
+ }
