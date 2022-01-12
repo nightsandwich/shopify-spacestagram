@@ -13,3 +13,14 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const image = await Image.findByPk(id, {
+      include: UserImage
+    })
+    res.json(image)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -1,5 +1,5 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -14,7 +14,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { styled } from '@mui/material/styles';
-import { editImage } from '../store'
+import { getImages, getImage, deleteUserImage, createUserImage } from '../store'
 /**
  * COMPONENT
  */
@@ -29,12 +29,18 @@ import { editImage } from '../store'
     duration: theme.transitions.duration.shortest,
   }),
 }));
+  
+
+export const Images = () => {
   const ImageCard = ({image}) => {
-    const [expanded, setExpanded] = React.useState(false);
+    
+    const [expanded, setExpanded] = useState(false)
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
+
+    
     return(
     <Card className='image-card' key={image.id} sx={{ width: 345, m: 1 }}>
       <CardMedia
@@ -59,13 +65,7 @@ import { editImage } from '../store'
   }}>
           {/* <IconButton aria-label="add to favorites"> */}
             <FavoriteIcon fontSize='large' sx={{color: 'red', opacity: '2'}}
-              onClick={({userId, image}) => {
-                if (image.userImages.includes(userImage => userImage.userId === userId)){
-                  updateImage({userId: userId, imageId: image.id}, 'delete')
-                } else {
-                  updateImage({userId: userId, imageId: image.id}, 'add')
-                }
-              }}
+              onClick={(ev) => handleClick(ev, image, auth)}
             />
           {/* </IconButton> */}
         </Badge>
@@ -81,25 +81,71 @@ import { editImage } from '../store'
       {
         expanded && <Typography variant='caption'>{image.explanation.split('. ').slice(0, 5).join('.')}</Typography>
       }
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography >{image.explanation}</Typography>
-        </CardContent>
-      </Collapse> */}
     </Card>
     )
   }
+  const dispatch = useDispatch()
+  const [loaded, setLoaded] = useState(false)
+  // const [reloaded, setReloaded] = useState(false)
+  const [imageIdToEdit, setImageIdToEdit] = useState(0)
 
-export const Home = props => {
-  const {username, images, userId} = props
+  const images = useSelector(({images}) => images.sort((a,b) => a.date < b.date ? -1 : 1))
+  const auth = useSelector(({auth}) => auth)
   
+  const loadImages = async() => {
+    await dispatch(getImages())
+  }
+  
+  const loadImage = async(id) => {
+    await dispatch(getImage(id))
+  }
+  
+  useEffect(() => {
+    loadImages()
+    setLoaded(true)
+  }, [])
+
+  useEffect((imageIdToEdit) => {
+    console.log('nope')
+    if(imageIdToEdit > 0){
+      console.log('yes', imageIdToEdit)
+      loadImage(imageIdToEdit)
+      setLoaded(true)
+      setImageIdToEdit(0)
+    }
+  }, [imageIdToEdit])
+  const handleClick = async (ev, image, auth) => {
+    ev.preventDefault()
+    await setImageIdToEdit(prev => image.id)
+    setLoaded(false)
+    console.log('image', image)
+    const userImage = image.userImages.find(userImage => userImage.userId === auth.id)
+    console.log('userImage, ', userImage)
+    console.log('imageIdToEdit, ', imageIdToEdit, image.id)
+    if (userImage){
+      await dispatch(deleteUserImage(userImage.id))
+    } else {
+      console.log('should be creating')
+      console.log('userid', auth.id, 'imageId', image.id)
+      await dispatch(createUserImage({userId: auth.id, imageId: image.id}))
+    }
+  }
+
+
+
+
+
+  if (!loaded || !auth) return '...loading'
+
+  
+
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <h3>Welcome, {auth.username}</h3>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => (
-            <ImageCard image={image} userId={userId} key={image.id} />
+            <ImageCard image={image} auth={auth} handleClick={handleClick} key={image.id} />
             )
           )
         }
@@ -108,20 +154,5 @@ export const Home = props => {
   )
 }
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    username: state.auth.username,
-    userId: state.auth.id,
-    images: state.images
-  }
-}
-const mapDispatch = dispatch => {
-  return {
-    updateImage: (userImage, type) => dispatch(updateImage(userImage, type))
-  }
-}
 
-export default connect(mapState, mapDispatch)(Home)
+export default Images
