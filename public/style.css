@@ -23,6 +23,8 @@ form div {
 }
  .image-card:hover {
   opacity: .9;
+  border-radius: 8;
+  box-shadow: 0 0px 3px 3px #0745a3;
  }
  .image-card {
    padding: .5rem;

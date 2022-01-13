@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import ImageCard from './ImageCard'
 import { getImages, addImage, deleteUserImage, createUserImage } from '../store'
-
+import CircularLoading from './CircularLoading'
+import { Button } from '@mui/material'
 /**
  * COMPONENT
  */
@@ -38,12 +39,12 @@ export const Images = () => {
     setImageIdToEdit(null)
   }
 
-  if (!loaded || !auth) return '...loading'
+  if (!loaded || !auth) return <CircularLoading />
 
   return (
     <div>
       <h3 style={{color: 'whitesmoke'}}>Welcome, {auth.username}</h3>
-      <button onClick={async() => await dispatch(addImage())}>Add a photo</button>
+      <Button variant='filled'  sx={{color: 'black', backgroundColor: 'ghostwhite'}} onClick={async() => await dispatch(addImage())}>Add Photo from a Random Date</Button>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => (
