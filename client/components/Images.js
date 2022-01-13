@@ -87,13 +87,15 @@ export const Images = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   // const [reloaded, setReloaded] = useState(false)
-  const [imageIdToEdit, setImageIdToEdit] = useState(0)
+  const [imageIdToEdit, setImageIdToEdit] = useState(null)
 
   const images = useSelector(({images}) => images.sort((a,b) => a.date < b.date ? -1 : 1))
   const auth = useSelector(({auth}) => auth)
   
   const loadImages = async() => {
     await dispatch(getImages())
+    setLoaded(true)
+    setImageIdToEdit(null)
   }
   
   const loadImage = async(id) => {
@@ -102,33 +104,34 @@ export const Images = () => {
   
   useEffect(() => {
     loadImages()
-    setLoaded(true)
-  }, [])
-
-  useEffect((imageIdToEdit) => {
-    console.log('nope')
-    if(imageIdToEdit > 0){
-      console.log('yes', imageIdToEdit)
-      loadImage(imageIdToEdit)
-      setLoaded(true)
-      setImageIdToEdit(0)
-    }
   }, [imageIdToEdit])
+
+  // useEffect((imageIdToEdit) => {
+  //   console.log('nope')
+  //   if(imageIdToEdit > 0){
+  //     console.log('yes', imageIdToEdit)
+  //     loadImage(imageIdToEdit)
+  //     setLoaded(true)
+  //     setImageIdToEdit(0)
+  //   }
+  // }, [imageIdToEdit])
   const handleClick = async (ev, image, auth) => {
     ev.preventDefault()
-    await setImageIdToEdit(prev => image.id)
+    setImageIdToEdit(image.id)
     setLoaded(false)
     console.log('image', image)
     const userImage = image.userImages.find(userImage => userImage.userId === auth.id)
     console.log('userImage, ', userImage)
     console.log('imageIdToEdit, ', imageIdToEdit, image.id)
     if (userImage){
+      console.log('deleting')
       await dispatch(deleteUserImage(userImage.id))
     } else {
       console.log('should be creating')
       console.log('userid', auth.id, 'imageId', image.id)
       await dispatch(createUserImage({userId: auth.id, imageId: image.id}))
     }
+    setImageIdToEdit(null)
   }
 
 
