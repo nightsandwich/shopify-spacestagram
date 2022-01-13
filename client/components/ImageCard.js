@@ -5,9 +5,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Collapse from '@mui/material/Collapse';
+import Divider from '@mui/material/Divider';
 import Badge from '@mui/material/Badge';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -33,20 +32,21 @@ const ImageCard = ({image, handleClick}) => {
     
     return(
     <Card className='image-card' key={image.id} sx={{ width: 345, m: 1 }}>
+        <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
+          {image.date}
+        </Typography>
       <CardMedia
         component="img"
         alt={image.title}
-        height="140"
+        height="200"
         image={image.url}
         sx={{mixBlendMode: 'multiply'}}
       />
       <CardContent>
-        <Typography gutterBottom variant="subtitle2" component="div">
-          {image.date}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" >
           {image.title}
         </Typography>
+        <Divider sx={{border: '1px solid grey'}}/>
       </CardContent>
       <CardActions disableSpacing>
         <Badge badgeContent={image.userImages.length} color='warning' sx={{opacity: '.7'}} showZero anchorOrigin={{

@@ -22,8 +22,8 @@ async function seed() {
   ])
   const [corinne, bob, cody] = users.map(user => user)
 
-  const startDate = '2021-01-01'
-  const endDate = '2021-06-30'
+  const startDate = '2021-12-01'
+  const endDate = '2021-12-31'
   const data = (await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}`)).data.filter(d => d.media_type === 'image')
   const images = await Promise.all(data.map(d => Image.create({ date: d.date, explanation: d.explanation, title: d.title, url: d.url })))
 
@@ -33,11 +33,7 @@ async function seed() {
     UserImage.create({ userId: cody.id, imageId: images[0].id }),
     UserImage.create({ userId: corinne.id, imageId: images[2].id }),
     UserImage.create({ userId: corinne.id, imageId: images[3].id }),
-  ])
-  await Promise.all([
-    images[0].update({ ...images[0], likes: 3 }),
-    images[2].update({ ...images[2], likes: 1 }),
-    images[3].update({ ...images[3], likes: 1 })
+    UserImage.create({ userId: cody.id, imageId: images[4].id }),
   ])
 
   console.log(`seeded ${users.length} users`)
