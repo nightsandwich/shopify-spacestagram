@@ -49,15 +49,13 @@ const ImageCard = ({image, handleClick}) => {
         <Divider sx={{border: '1px solid grey'}}/>
       </CardContent>
       <CardActions disableSpacing>
-        <Badge badgeContent={image.userImages.length} color='warning' sx={{opacity: '.7'}} showZero anchorOrigin={{
+        <Badge badgeContent={image.userImages.length} color='info' anchorOrigin={{
     vertical: 'top',
     horizontal: 'right',
   }}>
-          {/* <IconButton aria-label="add to favorites"> */}
-            <FavoriteIcon fontSize='large' sx={{color: 'red', opacity: '2'}}
+            <FavoriteIcon fontSize='large' sx={{color: 'red'}}
               onClick={handleClick}
             />
-          {/* </IconButton> */}
         </Badge>
         <ExpandMore
           expand={expanded}
