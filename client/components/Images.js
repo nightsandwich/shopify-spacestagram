@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import ImageCard from './ImageCard'
-import { getImages, deleteUserImage, createUserImage } from '../store'
+import { getImages, addImage, deleteUserImage, createUserImage } from '../store'
 
 /**
  * COMPONENT
@@ -13,7 +13,7 @@ export const Images = () => {
   const [loaded, setLoaded] = useState(false)
   const [imageIdToEdit, setImageIdToEdit] = useState(null)
 
-  const images = useSelector(({images}) => images.sort((a,b) => a.date < b.date ? -1 : 1))
+  const images = useSelector(({images}) => images.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1))
   const auth = useSelector(({auth}) => auth)
   
   const loadImages = async() => {
@@ -42,7 +42,8 @@ export const Images = () => {
 
   return (
     <div>
-      <h3>Welcome, {auth.username}</h3>
+      <h3 style={{color: 'whitesmoke'}}>Welcome, {auth.username}</h3>
+      <button onClick={async() => await dispatch(addImage())}>Add a photo</button>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => (

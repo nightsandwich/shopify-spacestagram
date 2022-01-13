@@ -1,9 +1,11 @@
 body {
   font-family: sans-serif;
+  background-color: black;
 }
 
 a {
   text-decoration: none;
+  color: whitesmoke;
 }
 
 label {
@@ -20,13 +22,9 @@ form div {
   display: inline-block;
 }
  .image-card:hover {
-  border: 3px solid dodgerblue;
+  opacity: .9;
  }
  .image-card {
-   padding: 1rem;
+   padding: .5rem;
  }
- img {
-   filter: saturate(150%);
-   filter: brightness(120%);
-   filter: contrast(120%);
- }
+ 

@@ -53,7 +53,7 @@ const ImageCard = ({image, handleClick}) => {
     vertical: 'top',
     horizontal: 'right',
   }}>
-            <FavoriteIcon fontSize='large' sx={{color: 'red'}}
+            <FavoriteIcon className='heart-icon' aria-label='like photo' fontSize='large' sx={{color: 'red'}}
               onClick={handleClick}
             />
         </Badge>
@@ -61,13 +61,13 @@ const ImageCard = ({image, handleClick}) => {
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
+          aria-label="show description of photo"
         >
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
       {
-        expanded && <Typography variant='caption'>{image.explanation.split('. ').slice(0, 5).join('.')}</Typography>
+        expanded && <Typography variant='caption'>{image.explanation.split('. ').slice(0, 3).join('. ')+'.'}</Typography>
       }
     </Card>
     )
