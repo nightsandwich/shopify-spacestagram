@@ -57,13 +57,6 @@ const ImageCard = ({image, handleClick}) => {
             <FavoriteIcon className='heart-icon' aria-label='like photo' fontSize='large' sx={{color: 'red'}}
               onClick={handleClick}
             />
-            <Badge
-            badgeContent={image.userImages.filter(userImage => userImage.userId === auth.id).length}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-            />
         </Badge>
         <ExpandMore
           expand={expanded}
