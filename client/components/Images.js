@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import ImageCard from './ImageCard'
-import { getImages, getImage, deleteUserImage, createUserImage } from '../store'
+import { getImages, deleteUserImage, createUserImage } from '../store'
+
 /**
  * COMPONENT
  */
-
-  
 
 export const Images = () => {
   
@@ -20,7 +19,6 @@ export const Images = () => {
   const loadImages = async() => {
     await dispatch(getImages())
     setLoaded(true)
-    setImageIdToEdit(null)
   }
   
   useEffect(() => {

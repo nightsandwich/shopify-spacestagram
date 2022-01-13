@@ -1,7 +1,4 @@
 import axios from 'axios'
-import history from '../history'
-
-const TOKEN = 'token'
 
 /**
  * ACTION TYPES
