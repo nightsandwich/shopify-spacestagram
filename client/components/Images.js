@@ -4,12 +4,6 @@ import ImageCard from './ImageCard'
 import { getImages, addImage, deleteUserImage, createUserImage } from '../store'
 import CircularLoading from './CircularLoading'
 import { Button } from '@mui/material'
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Switch from '@mui/material/Switch';
 
 /**
  * COMPONENT

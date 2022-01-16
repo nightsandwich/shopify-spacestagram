@@ -16,7 +16,6 @@ const _deleteUserImage = id => ({type: DELETE_USER_IMAGE, id})
  * THUNK CREATORS
  */
 export const createUserImage = ({userId, imageId}) => {
-  // console.log('userimage', userImage)
   return async(dispatch) => {
     const userImage = (await axios.post('/api/userImages', {userId, imageId})).data
     dispatch(_createUserImage(userImage))

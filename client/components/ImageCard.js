@@ -68,9 +68,9 @@ const ImageCard = ({image, handleClick}) => {
       </CardContent>
       <CardActions disableSpacing>
         <Badge badgeContent={image.userImages.length} color='info' anchorOrigin={{
-    vertical: 'top',
-    horizontal: 'right',
-  }}>
+          vertical: 'top',
+          horizontal: 'right',
+        }}>
             <FavoriteIcon className='heart-icon' aria-label='like photo' fontSize='large' sx={{color: 'red'}}
               onClick={handleClick}
             />
