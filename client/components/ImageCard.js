@@ -40,6 +40,19 @@ const ImageCard = ({image, handleClick}) => {
         <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
           {image.date}
         </Typography>
+        <Badge 
+          badgeContent={image.userImages.length}  
+          color='error' 
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+        >
+          <FavoriteIcon className='heart-icon' aria-label='all likes' fontSize='small' sx={{color: 'orange'}}/>
+          </Badge>
+        <Typography variant="subtitle2" color='text.secondary' m={1}>
+          total likes from all users
+        </Typography>
       <CardMedia
         component="img"
         alt={image.title}
@@ -62,6 +75,7 @@ const ImageCard = ({image, handleClick}) => {
               onClick={handleClick}
             />
         </Badge>
+        
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
