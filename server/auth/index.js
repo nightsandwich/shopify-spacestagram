@@ -30,8 +30,7 @@ router.get('/me', async (req, res, next) => {
     const userImages = (await UserImage.findAll({
       where: {
         userId: me.id
-      },
-      attributes: ['imageId']
+      }
     }))
     res.send({id: me.id, username: me.username, likes: userImages})
   } catch (ex) {
