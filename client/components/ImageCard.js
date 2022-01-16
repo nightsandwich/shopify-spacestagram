@@ -13,6 +13,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { styled } from '@mui/material/styles';
 import auth from "../store/auth";
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&display=swap');
+</style>
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
