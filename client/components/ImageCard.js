@@ -6,16 +6,13 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Badge from '@mui/material/Badge';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { styled } from '@mui/material/styles';
-import auth from "../store/auth";
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&display=swap');
-</style>
+import LikesBadge from "./LikesBadge";
+
+{/* <style>
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&display=swap'); */}
+// </style>
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -40,19 +37,19 @@ const ImageCard = ({image, handleClick}) => {
         <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
           {image.date}
         </Typography>
-        <Badge 
+        <LikesBadge 
           badgeContent={image.userImages.length}  
-          color='error' 
+          color={'error'}
           anchorOrigin={{
-            vertical: 'bottom',
+            vertical: 'top',
             horizontal: 'right'
           }}
-        >
-          <FavoriteIcon className='heart-icon' aria-label='all likes' fontSize='small' sx={{color: 'orange'}}/>
-          </Badge>
-        <Typography variant="subtitle2" color='text.secondary' m={1}>
-          total likes from all users
-        </Typography>
+          fontSize={'small'}
+          iconColor={'#FA9F9F'}
+          ariaLabel={'all likes'}
+          title={'Total Likes From All Users'}
+          onClick={()=>{}}
+        />
       <CardMedia
         component="img"
         alt={image.title}
@@ -67,14 +64,19 @@ const ImageCard = ({image, handleClick}) => {
         <Divider sx={{border: '1px solid grey'}}/>
       </CardContent>
       <CardActions disableSpacing>
-        <Badge badgeContent={image.userImages.length} color='info' anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}>
-            <FavoriteIcon className='heart-icon' aria-label='like photo' fontSize='large' sx={{color: 'red'}}
-              onClick={handleClick}
-            />
-        </Badge>
+        <LikesBadge 
+          badgeContent={image.userImages.length}
+          color={'info'} 
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          fontSize={'large'}
+          iconColor={'red'}
+          ariaLabel={'like photo'}
+          onClick={handleClick}
+          title={''}
+        />
         
         <ExpandMore
           expand={expanded}

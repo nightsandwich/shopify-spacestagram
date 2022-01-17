@@ -15,7 +15,7 @@ export const Images = () => {
   const [loaded, setLoaded] = useState(false)
   const [imageIdToEdit, setImageIdToEdit] = useState(null)
 
-  const images = useSelector(({images}) => images.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1))
+  const images = useSelector(({images}) => images.sort((a,b) => a.id > b.id ? -1 : 1))
   const auth = useSelector(({auth}) => auth)
   
   const loadImages = async() => {
@@ -30,7 +30,8 @@ export const Images = () => {
   const handleClick = async (ev, image, auth) => {
     ev.preventDefault()
     setImageIdToEdit(image.id)
-    setLoaded(false)
+    console.log(image.id)
+    // setLoaded(false)
     const userImage = image.userImages.find(userImage => userImage.userId === auth.id)
     if (userImage){
       await dispatch(deleteUserImage(userImage.id))
@@ -44,8 +45,7 @@ export const Images = () => {
 
   return (
     <div>
-      <h3 style={{color: 'whitesmoke'}}>Welcome, {auth.username}</h3>
-      <Button variant='filled'  sx={{color: 'black', backgroundColor: 'ghostwhite'}} onClick={async() => await dispatch(addImage())}>Add Photo from a Random Date</Button>
+      <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1}} onClick={async() => await dispatch(addImage())}>Add Photo from a Random Date</Button>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => (
