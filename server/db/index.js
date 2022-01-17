@@ -6,6 +6,8 @@ const User = require('./models/User')
 const Image = require('./models/Image')
 const UserImage = require('./models/UserImage')
 
+
+//UserImage has a userId and an imageId to represent each "Like"
 UserImage.belongsTo(User)
 User.hasMany(UserImage)
 UserImage.belongsTo(Image)

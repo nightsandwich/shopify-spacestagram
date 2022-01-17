@@ -6,15 +6,10 @@ require('dotenv').config()
 
 const API_KEY = process.env.NASA_API
 
-/**
- * seed - this function clears the database, updates tables to
- *      match the models, and populates the database.
- */
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  // Creating Users
   const users = await Promise.all([
     User.create({ username: 'Corinne', password: '123' }),
     User.create({ username: 'Bob', password: '123' }),
@@ -26,8 +21,9 @@ async function seed() {
   const endDate = '2021-12-31'
   const data = (await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}`)).data.filter(d => d.media_type === 'image')
   const images = await Promise.all(data.map(d => Image.create({ date: d.date, explanation: d.explanation, title: d.title, url: d.url })))
-
-  await Promise.all([
+  
+  //UserImage represents a certain User liking a certain Image
+  const userImages = await Promise.all([
     UserImage.create({ userId: corinne.id, imageId: images[0].id }),
     UserImage.create({ userId: bob.id, imageId: images[0].id }),
     UserImage.create({ userId: cody.id, imageId: images[0].id }),
@@ -38,6 +34,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${images.length} images`)
+  console.log(`seeded ${userImages.length} userImages (Likes)`)
   console.log(`seeded successfully`)
 }
 
@@ -55,14 +52,6 @@ async function runSeed() {
   }
 }
 
-/*
-  Execute the `seed` function, IF we ran this module directly (`node seed`).
-  `Async` functions always return a promise, so we can use `catch` to handle
-  any errors that might occur inside of `seed`.
-*/
 if (module === require.main) {
   runSeed()
 }
-
-// we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed

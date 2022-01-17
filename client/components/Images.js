@@ -30,8 +30,6 @@ export const Images = () => {
   const handleClick = async (ev, image, auth) => {
     ev.preventDefault()
     setImageIdToEdit(image.id)
-    console.log(image.id)
-    // setLoaded(false)
     const userImage = image.userImages.find(userImage => userImage.userId === auth.id)
     if (userImage){
       await dispatch(deleteUserImage(userImage.id))
