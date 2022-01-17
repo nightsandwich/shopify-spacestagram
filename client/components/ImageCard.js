@@ -24,29 +24,28 @@ const ExpandMore = styled((props) => {
       duration: theme.transitions.duration.shortest,
     }),
   }));
-const ImageCard = ({image, handleClick}) => {
+const ImageCard = ({image, handleClick, doesUserLikeThisImage, findLikes}) => {
     
     const [expanded, setExpanded] = useState(false)
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
-    
+    const [doesUserLikeThisImage]
+    const findLikes = {doesUserLikeThismage}
     return(
     <Card className='image-card' key={image.id} sx={{ width: 345, m: 1 }}>
         <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
           {image.date}
         </Typography>
         <LikesBadge 
-          badgeContent={image.userImages.length}  
           color={'error'}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right'
           }}
           fontSize={'small'}
-          iconColor={'#FA9F9F'}
-          ariaLabel={'all likes'}
+          iconColor={`(${findLikes(image) ? lightgrey : red})
           title={'Total Likes From All Users'}
           onClick={()=>{}}
         />
@@ -65,14 +64,14 @@ const ImageCard = ({image, handleClick}) => {
       </CardContent>
       <CardActions disableSpacing>
         <LikesBadge 
-          badgeContent={image.userImages.length}
+          // badgeContent={image.userImages.length}
           color={'info'} 
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right',
           }}
           fontSize={'large'}
-          iconColor={'red'}
+          iconColor={`${doesUserLikeThisImage()} ? red : grey`}
           ariaLabel={'like photo'}
           onClick={handleClick}
           title={''}

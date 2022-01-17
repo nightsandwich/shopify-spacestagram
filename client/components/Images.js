@@ -39,6 +39,11 @@ export const Images = () => {
     setImageIdToEdit(null)
   }
 
+  const doesUserLikeThisImage = (image, auth) => {
+    if (auth.likes.includes(like => like.imageId === image.id)) return true
+    return false
+  }
+
   if (!loaded || !auth) return <CircularLoading />
 
   return (
@@ -47,7 +52,7 @@ export const Images = () => {
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => (
-            <ImageCard image={image} handleClick={(ev) => handleClick(ev, image, auth)} key={image.id} />
+            <ImageCard doesUserLikeThisImage={()=> doesUserLikeThisImage(image, auth)} image={image} handleClick={(ev) => handleClick(ev, image, auth)} key={image.id} />
             )
           )
         }
