@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+
 import LikesBadge from "./LikesBadge";
 
 const ExpandMore = styled((props) => {
@@ -61,7 +63,6 @@ const ImageCard = ({image, handleClick, likesIt}) => {
       </CardContent>
       <CardActions disableSpacing>
         <LikesBadge 
-          // badgeContent={image.userImages.length}
           color={'info'} 
           anchorOrigin={{
             vertical: 'top',

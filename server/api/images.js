@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
     image = await Image.findByPk(image.id, {
       include: UserImage
     })
-    res.json(image)
+    res.status(201).send(image)
   } catch (err) {
     next(err)
   }

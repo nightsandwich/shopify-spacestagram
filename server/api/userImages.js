@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
   try {
     const { userId, imageId } = req.body
     const userImage = await UserImage.create({ userId, imageId })
-    res.send(userImage)
+    res.status(201).send(userImage)
   } catch (err) {
     next(err)
   }
@@ -29,6 +29,7 @@ router.delete('/:id', async (req, res, next) => {
     const { id } = req.params
     const userImage = await UserImage.findByPk(id)
     await userImage.destroy()
+    res.status(204)
   } catch (err) {
     next(err)
   }

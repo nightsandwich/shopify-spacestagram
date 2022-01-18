@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import ImageCard from './ImageCard'
+
+import { Button } from '@mui/material'
+
 import { getImages, addImage, deleteUserImage, createUserImage } from '../store'
+
 import CircularLoading from './CircularLoading'
-import { Button, fabClasses } from '@mui/material'
+import ImageCard from './ImageCard'
 
 /**
  * COMPONENT
@@ -37,13 +40,17 @@ export const Images = () => {
   const handleClick = async (ev, image, auth) => {
     ev.preventDefault()
     setImageIdToEdit(image.id)
-    const userImage = image.userImages.find(userImage => userImage.userId === auth.id)
-    if (userImage){
-      await dispatch(deleteUserImage(userImage.id))
-    } else {
-      await dispatch(createUserImage({userId: auth.id, imageId: image.id}))
+    try {
+      const userImage = image.userImages.find(userImage => userImage.userId === auth.id)
+      if (userImage){
+        await dispatch(deleteUserImage(userImage.id))
+      } else {
+        await dispatch(createUserImage({userId: auth.id, imageId: image.id}))
+      }
+      setImageIdToEdit(null)
+    } catch (error) {
+      console.log(error)
     }
-    setImageIdToEdit(null)
   }
 
   if (!loaded || !auth) return <CircularLoading />
