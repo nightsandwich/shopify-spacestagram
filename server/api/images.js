@@ -22,8 +22,14 @@ router.get('/', async (req, res, next) => {
 })
 router.post('/', async (req, res, next) => {
   try {
-    const RANDOM_DATE = faker.date.between('1996-01-01', '2021-11-31').toISOString().slice(0,10)
+    let RANDOM_DATE = faker.date.between('1996-01-01', '2021-11-31').toISOString().slice(0,10)
     let image = (await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${RANDOM_DATE}`)).data
+    
+    while (image.media_type !== 'image'){
+      RANDOM_DATE = faker.date.between('1996-01-01', '2021-11-31').toISOString().slice(0,10)
+      image = (await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${RANDOM_DATE}`)).data
+    }
+  
     image = await Image.create({ date: image.date, explanation: image.explanation, title: image.title, url: image.url})
     image = await Image.findByPk(image.id, {
       include: UserImage
