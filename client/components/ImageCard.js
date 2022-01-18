@@ -21,7 +21,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
 
-const ImageCard = ({image, handleClick}) => {  
+const ImageCard = ({image, handleClick, likesIt}) => {  
     const [expanded, setExpanded] = useState(false)
 
     const handleExpandClick = () => {
@@ -61,14 +61,14 @@ const ImageCard = ({image, handleClick}) => {
       </CardContent>
       <CardActions disableSpacing>
         <LikesBadge 
-          badgeContent={image.userImages.length}
+          // badgeContent={image.userImages.length}
           color={'info'} 
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right',
           }}
           fontSize={'large'}
-          iconColor={'red'}
+          iconColor={likesIt ? 'red' : '#B19999'}
           ariaLabel={'like photo'}
           onClick={handleClick}
           title={''}

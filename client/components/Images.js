@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import ImageCard from './ImageCard'
 import { getImages, addImage, deleteUserImage, createUserImage } from '../store'
 import CircularLoading from './CircularLoading'
-import { Button } from '@mui/material'
+import { Button, fabClasses } from '@mui/material'
 
 /**
  * COMPONENT
@@ -22,6 +22,13 @@ export const Images = () => {
     await dispatch(getImages())
     setLoaded(true)
   }
+
+  const doesUserLikeThisImage = (image, auth) => {
+    if (image.userImages.find(userImage => userImage.userId === auth.id)){
+      return true
+    }
+    return false
+  }
   
   useEffect(() => {
     loadImages()
@@ -39,11 +46,6 @@ export const Images = () => {
     setImageIdToEdit(null)
   }
 
-  const doesUserLikeThisImage = (image, auth) => {
-    if (auth.likes.includes(like => like.imageId === image.id)) return true
-    return false
-  }
-
   if (!loaded || !auth) return <CircularLoading />
 
   return (
@@ -51,9 +53,11 @@ export const Images = () => {
       <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1}} onClick={async() => await dispatch(addImage())}>Add Photo from a Random Date</Button>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
-          images.map(image => (
-            <ImageCard doesUserLikeThisImage={()=> doesUserLikeThisImage(image, auth)} image={image} handleClick={(ev) => handleClick(ev, image, auth)} key={image.id} />
-            )
+          images.map(image => {
+            const likesIt = doesUserLikeThisImage(image, auth)
+            return (
+            <ImageCard likesIt={likesIt} image={image} handleClick={(ev) => handleClick(ev, image, auth)} key={image.id} />
+            )}
           )
         }
         </div>
