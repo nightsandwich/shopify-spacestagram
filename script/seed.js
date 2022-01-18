@@ -30,6 +30,12 @@ async function seed() {
     UserImage.create({ userId: corinne.id, imageId: images[2].id }),
     UserImage.create({ userId: corinne.id, imageId: images[3].id }),
     UserImage.create({ userId: cody.id, imageId: images[4].id }),
+    UserImage.create({ userId: bob.id, imageId: images[4].id }),
+    UserImage.create({ userId: bob.id, imageId: images[10].id }),
+    UserImage.create({ userId: bob.id, imageId: images[9].id }),
+    UserImage.create({ userId: cody.id, imageId: images[9].id }),
+    UserImage.create({ userId: cody.id, imageId: images[9].id }),
+    UserImage.create({ userId: cody.id, imageId: images[9].id }),
   ])
 
   console.log(`seeded ${users.length} users`)

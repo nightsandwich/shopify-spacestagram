@@ -10,10 +10,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import LikesBadge from "./LikesBadge";
 
-{/* <style>
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&display=swap'); */}
-// </style>
-
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -24,28 +20,29 @@ const ExpandMore = styled((props) => {
       duration: theme.transitions.duration.shortest,
     }),
   }));
-const ImageCard = ({image, handleClick, doesUserLikeThisImage, findLikes}) => {
-    
+
+const ImageCard = ({image, handleClick}) => {  
     const [expanded, setExpanded] = useState(false)
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
-    const [doesUserLikeThisImage]
-    const findLikes = {doesUserLikeThismage}
+    
     return(
     <Card className='image-card' key={image.id} sx={{ width: 345, m: 1 }}>
         <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
           {image.date}
         </Typography>
         <LikesBadge 
+          badgeContent={image.userImages.length}  
           color={'error'}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right'
           }}
           fontSize={'small'}
-          iconColor={`(${findLikes(image) ? lightgrey : red})
+          iconColor={'#FA9F9F'}
+          ariaLabel={'all likes'}
           title={'Total Likes From All Users'}
           onClick={()=>{}}
         />
@@ -64,14 +61,14 @@ const ImageCard = ({image, handleClick, doesUserLikeThisImage, findLikes}) => {
       </CardContent>
       <CardActions disableSpacing>
         <LikesBadge 
-          // badgeContent={image.userImages.length}
+          badgeContent={image.userImages.length}
           color={'info'} 
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right',
           }}
           fontSize={'large'}
-          iconColor={`${doesUserLikeThisImage()} ? red : grey`}
+          iconColor={'red'}
           ariaLabel={'like photo'}
           onClick={handleClick}
           title={''}
