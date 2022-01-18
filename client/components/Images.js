@@ -22,8 +22,12 @@ export const Images = () => {
   const auth = useSelector(({auth}) => auth)
   
   const loadImages = async() => {
-    await dispatch(getImages())
-    setLoaded(true)
+    try {
+      await dispatch(getImages())
+      setLoaded(true)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const doesUserLikeThisImage = (image, auth) => {
