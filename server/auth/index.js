@@ -27,12 +27,7 @@ router.post('/signup', async (req, res, next) => {
 router.get('/me', async (req, res, next) => {
   try {
     const me = (await User.findByToken(req.headers.authorization, {include: UserImage}))
-    const userImages = (await UserImage.findAll({
-      where: {
-        userId: me.id
-      }
-    }))
-    res.send({id: me.id, username: me.username, likes: userImages})
+    res.send({id: me.id, username: me.username})
   } catch (ex) {
     next(ex)
   }
