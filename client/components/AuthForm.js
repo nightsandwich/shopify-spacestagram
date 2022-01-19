@@ -9,7 +9,12 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div>
+        <h5 style={{color: 'whitesmoke'}}>
+          View images from NASA's Photo of the Day - from December 2021 plus an assortment of random dates!
+        </h5>
+      </div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">

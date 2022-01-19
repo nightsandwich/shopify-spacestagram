@@ -12,14 +12,22 @@ import ImageCard from './ImageCard'
  * COMPONENT
  */
 
-export const Images = () => {
+export const Images = ({history}) => {
   
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [imageIdToEdit, setImageIdToEdit] = useState(null)
-
-  const images = useSelector(({images}) => images.sort((a,b) => a.id > b.id ? -1 : 1))
+  const [myLikes, setMyLikes] = useState(false)
+  
   const auth = useSelector(({auth}) => auth)
+
+  let images = useSelector(({images}) => images.sort((a,b) => a.id > b.id ? -1 : 1))
+  
+  if (myLikes) {
+    images = images.filter(image => 
+        image.userImages.find(userImage => userImage.userId === auth.id)
+      )
+  }
   
   const loadImages = async() => {
     try {
@@ -61,7 +69,11 @@ export const Images = () => {
 
   return (
     <div>
-      <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1, ml: 1}} onClick={async() => await dispatch(addImage())}>Random Photo</Button>
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Button variant='filled'  sx={{color: 'white', backgroundColor: 'green', mb: 1, ml: 1}} onClick={async() => await dispatch(addImage())}>Add Random Photo</Button>
+        <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1, ml: 1}} onClick={() => setMyLikes(true)}>My Likes</Button>
+        <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1, ml: 1}} onClick={() => setMyLikes(false)}>All Photos</Button>
+      </div>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => {

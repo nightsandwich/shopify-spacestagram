@@ -5,7 +5,7 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, username, isLoggedIn}) => (
   <div>
-    <h1 style={{color: 'whitesmoke', textAlign: 'center'}}>NASA Photo of the Day - December 2021</h1>
+    <h1 style={{color: 'whitesmoke', textAlign: 'center'}}>NASA's Photo of the Day</h1>
     <nav>
       {isLoggedIn ? (
         <div>
