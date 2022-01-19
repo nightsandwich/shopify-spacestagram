@@ -24,7 +24,6 @@ export const Images = () => {
   const loadImages = async() => {
     try {
       await dispatch(getImages())
-      setLoaded(true)
     } catch (error) {
       console.log(error)
     }
@@ -39,6 +38,7 @@ export const Images = () => {
   
   useEffect(() => {
     loadImages()
+    setLoaded(true)
   }, [imageIdToEdit])
 
   const handleClick = async (ev, image, auth) => {
