@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: black;
 }
 
@@ -21,12 +21,27 @@ form div {
   margin: 1em;
   display: inline-block;
 }
- .image-card:hover {
+ 
+.image-card:hover {
   opacity: .9;
   border-radius: 8;
   box-shadow: 0 0px 3px 3px #0745a3;
  }
+ 
  .image-card {
    padding: .5rem;
  }
- 
+
+ label {
+   color: whitesmoke;
+ }
+
+ input {
+   border-radius: 6px;
+ }
+
+ .submit-button {
+   background-color: rgb(0, 180, 81);
+   border-radius: 4px;
+   padding: .5rem;
+ }

@@ -61,7 +61,7 @@ export const Images = () => {
 
   return (
     <div>
-      <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1}} onClick={async() => await dispatch(addImage())}>Add Photo from a Random Date</Button>
+      <Button variant='filled'  sx={{color: 'white', backgroundColor: 'dodgerBlue', mb: 1, ml: 1}} onClick={async() => await dispatch(addImage())}>Random Photo</Button>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch', alignItems: 'stretch'}}>
         {
           images.map(image => {

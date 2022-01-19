@@ -3,11 +3,11 @@ Spacestagram uses NASA's Picture of the Day API to display photos from December 
 
 ## Features
 * A user can sign up and log in to view the photos and click the Heart icon to "Like" the photo.
-    * If you'd like to log-in as an already-existing user, seeded users are **Corinne**, **Cody**, and **Bob** with passwords **123**.
+    * If you'd like to log in as an already-existing user, the seeded users are **Corinne**, **Cody**, and **Bob** with passwords **123**.
     * The heart will be red if the user likes it, and grey if the user does not like it or chooses to "unlike" it. 
 * The top of the image card shows a heart with a badge indicating the total number of likes it received from all users.  
 * A user can click the down facing arrow to read the description of the photo.
-* A user can click the "Add Photo From a Random Date" button to add a random photo to the gallery.
+* A user can click the "RANDOM PHOTO" button to add a photo from a random date (before December 2021) to the gallery.
 
 ## Tech Stack
 * JavaScript
