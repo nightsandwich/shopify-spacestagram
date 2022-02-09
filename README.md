@@ -16,8 +16,6 @@ Spacestagram uses NASA's Picture of the Day API to display photos from December 
 
 - [Github Repo](https://github.com/nightsandwich/shopify-spacestagram "Spacestagram Repo")
 
-- [Shopify Front End Developer Intern Challenge - Summer 2022](https://docs.google.com/document/d/13zXpyrC2yGxoLXKktxw2VJG2Jw8SdUfliLM-bYQLjqE/edit# "Shopify Front End Developer Intern Challenge - Summer 2022")
-
 ## To Run Locally
 
 Install: **`"npm i"`**
